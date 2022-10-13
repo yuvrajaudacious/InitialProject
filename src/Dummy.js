@@ -94,7 +94,7 @@ export const userdata =[
     },
     {
       "id": 5,
-      "name": "Chelsey Dietrich",
+      "name": "yuvraj Dietrich",
       "username": "Kamren",
       "email": "Lucio_Hettinger@annie.ca",
       "address": {

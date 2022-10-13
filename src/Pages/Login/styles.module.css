@@ -1,0 +1,38 @@
+.list {
+    
+    font-size: small;
+    padding: 5px;
+    margin-left: -16px;
+    border-radius: 25px;
+    width: 40%;
+}
+.img{
+    width: 200px;
+}
+/* .card{
+    border-radius: 119px
+} */
+.body{
+    background-image: url("https://wallpaperaccess.com/full/4893706.jpg " );
+}
+.Name{
+    text-align: center;
+    text-shadow: 10px;
+}
+   
+.forget{
+    margin-bottom: 28px;
+    margin-left: 330px;
+}
+.crete{
+    margin-left: 165px;
+    margin-top: 20px;
+}
+.log{
+    width: 298px;
+    margin-left: 40px;
+}
+.well{
+    margin-top: -48px;
+    margin-left: 35px;
+}

@@ -2,9 +2,9 @@ export const userdata =[
 
     {
       "id": 1,
-      "name": "Leanne Graham",
+      "name": "Yuvraj ",
       "username": "Bret",
-      "email": "Sincere@april.biz",
+      "email": "Yuvraj@gmail.com",
       "address": {
         "street": "Kulas Light",
         "suite": "Apt. 556",
@@ -15,7 +15,7 @@ export const userdata =[
           "lng": "81.1496"
         }
       },
-      "phone": "1-770-736-8031 x56442",
+      "phone": "77000-73680 ",
       "website": "hildegard.org",
       "company": {
         "name": "Romaguera-Crona",
@@ -25,9 +25,9 @@ export const userdata =[
     },
     {
       "id": 2,
-      "name": "Ervin Howell",
+      "name": "Raj  ",
       "username": "Antonette",
-      "email": "Shanna@melissa.tv",
+      "email": "Raj@gmail.com",
       "address": {
         "street": "Victor Plains",
         "suite": "Suite 879",
@@ -38,7 +38,7 @@ export const userdata =[
           "lng": "-34.4618"
         }
       },
-      "phone": "010-692-6593 x09125",
+      "phone": "69265-93125",
       "website": "anastasia.net",
       "company": {
         "name": "Deckow-Crist",
@@ -48,9 +48,9 @@ export const userdata =[
     },
     {
       "id": 3,
-      "name": "Clementine Bauch",
+      "name": "Hariom ",
       "username": "Samantha",
-      "email": "Nathan@yesenia.net",
+      "email": "Hariom@gmail.com",
       "address": {
         "street": "Douglas Extension",
         "suite": "Suite 847",
@@ -61,7 +61,7 @@ export const userdata =[
           "lng": "-47.0653"
         }
       },
-      "phone": "1-463-123-4447",
+      "phone": "63123-04447",
       "website": "ramiro.info",
       "company": {
         "name": "Romaguera-Jacobson",
@@ -71,9 +71,9 @@ export const userdata =[
     },
     {
       "id": 4,
-      "name": "Patricia Lebsack",
+      "name": "Vijay ",
       "username": "Karianne",
-      "email": "Julianne.OConner@kory.org",
+      "email": "Vijay@gmail.com",
       "address": {
         "street": "Hoeger Mall",
         "suite": "Apt. 692",
@@ -84,7 +84,7 @@ export const userdata =[
           "lng": "-164.2990"
         }
       },
-      "phone": "493-170-9623 x156",
+      "phone": "96231-90156",
       "website": "kale.biz",
       "company": {
         "name": "Robel-Corkery",
@@ -94,9 +94,9 @@ export const userdata =[
     },
     {
       "id": 5,
-      "name": "yuvraj Dietrich",
+      "name": "Gunjali ",
       "username": "Kamren",
-      "email": "Lucio_Hettinger@annie.ca",
+      "email": "Gunjali@gmail.com",
       "address": {
         "street": "Skiles Walks",
         "suite": "Suite 351",
@@ -117,9 +117,9 @@ export const userdata =[
     },
     {
       "id": 6,
-      "name": "Mrs. Dennis Schulist",
+      "name": "Tarun",
       "username": "Leopoldo_Corkery",
-      "email": "Karley_Dach@jasper.info",
+      "email": "Tarun@gmail.com",
       "address": {
         "street": "Norberto Crossing",
         "suite": "Apt. 950",
@@ -140,9 +140,9 @@ export const userdata =[
     },
     {
       "id": 7,
-      "name": "Kurtis Weissnat",
+      "name": " Ankush ",
       "username": "Elwyn.Skiles",
-      "email": "Telly.Hoeger@billy.biz",
+      "email": "Ankush@gmail.com",
       "address": {
         "street": "Rex Trail",
         "suite": "Suite 280",
@@ -163,9 +163,9 @@ export const userdata =[
     },
     {
       "id": 8,
-      "name": "Nicholas Runolfsdottir V",
+      "name": " Roshni",
       "username": "Maxime_Nienow",
-      "email": "Sherwood@rosamond.me",
+      "email": "Roshni@gmail.com",
       "address": {
         "street": "Ellsworth Summit",
         "suite": "Suite 729",
@@ -186,9 +186,9 @@ export const userdata =[
     },
     {
       "id": 9,
-      "name": "Glenna Reichert",
+      "name": " Raj L",
       "username": "Delphine",
-      "email": "Chaim_McDermott@dana.io",
+      "email": "Raj@gmail.com",
       "address": {
         "street": "Dayna Park",
         "suite": "Suite 449",
@@ -211,7 +211,7 @@ export const userdata =[
       "id": 10,
       "name": "Clementina DuBuque",
       "username": "Moriah.Stanton",
-      "email": "Rey.Padberg@karina.biz",
+      "email": "Yuvraj@gmail.com",
       "address": {
         "street": "Kattie Turnpike",
         "suite": "Suite 198",

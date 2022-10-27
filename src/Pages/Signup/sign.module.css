@@ -1,4 +1,12 @@
-.border_radius{
-    border-radius: 25px;
-    margin-top: 20px;
+.btt{
+    margin-left: -1px;
+   max-width:150px ; 
+}
+.h{
+    width: 600px;
+    margin-left: -15px;
+}
+.bg{
+    background-image: url("https://wallpaperaccess.com/full/4893706.jpg ");
+    height: 100vh;
 }

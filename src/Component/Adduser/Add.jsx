@@ -1,66 +1,87 @@
-import Button from 'react-bootstrap/Button';
-import Col from 'react-bootstrap/Col';
-import Form from 'react-bootstrap/Form';
-import Row from 'react-bootstrap/Row';
+import Button from "react-bootstrap/Button";
+import Col from "react-bootstrap/Col";
+import Form from "react-bootstrap/Form";
+import Row from "react-bootstrap/Row";
+import styles from "./add.module.css";
+import { useState } from "react";
+import { Link } from "react-router-dom";
 
 function Add() {
+  const [email, setEmail] = useState();
+  const [password, setpassword] = useState();
+
+  const onSubmit = () => {
+    console.log(email, password);
+  };
   return (
-    <>    <Form className='card w-75 mx-5 my-5'>
-        <h2 className='mx-4 my-1 w-5  text-dark
-‍ˈ'><b>Add User </b></h2>
-      
-      <Row className="mb-3 mx-2 my-3">
-        <Form.Group as={Col} controlId="formGridEmail">
-          <Form.Label>Email</Form.Label>
-          <Form.Control type="email" placeholder="Enter email" />
-        </Form.Group>
+    <>
+          <div className={`${styles.bg}`}>
 
-        <Form.Group as={Col} controlId="formGridPassword">
-          <Form.Label>Password</Form.Label>
-          <Form.Control type="password" placeholder="Password" />
-        </Form.Group>
-      </Row>
+      <div>
+        <div className={` container card w-50  my-  ${styles.wi}`}>
+          <div class={`card-header ${styles.h}`}>
+            <h2 className=" mx-3 my-1 w-5 " style={{ color: "" }}>
+              Add User{" "}
+            </h2>
+          </div>
+          <Form>
+            <Row className="mb-3 mx-2 my-3">
+              <Form.Group as={Col} controlId="formGridName">
+                <Form.Label>Name</Form.Label>
+                <Form.Control type="Name" placeholder="Enter Name" />
+              </Form.Group>
 
-      <Form.Group className="mb-2  mx-3 my-3" controlId="formGridAddress1">
-        <Form.Label>Address</Form.Label>
-        <Form.Control placeholder="1234 Main St" />
-      </Form.Group>
+              <Form.Group as={Col} controlId="formGridPassword">
+                <Form.Label>Contact Number</Form.Label>
+                <Form.Control type="number" placeholder="Number" />
+              </Form.Group>
+            </Row>
 
-      <Form.Group className="mb-3  mx-3 my-3" controlId="formGridAddress2">
-        <Form.Label>Address 2</Form.Label>
-        <Form.Control placeholder="Apartment, studio, or floor" />
-      </Form.Group>
+            <Form.Group className="mb-2  mx-3 my-3" controlId="formGridemail">
+              <Form.Label>Email</Form.Label>
+              <Form.Control placeholder="@gmail.com" />
+            </Form.Group>
 
-      <Row className="mb-3  mx-3 my-3">
-        <Form.Group as={Col} controlId="formGridCity">
-          <Form.Label>City</Form.Label>
-          <Form.Control />
-        </Form.Group>
+            <Form.Group className="mb-3  mx-3 my-3" controlId="formGridAddres">
+              <Form.Label>Address </Form.Label>
+              <Form.Control placeholder="Apartment, studio, or floor" />
+            </Form.Group>
+            <Form.Group className="mb-3  mx-3 my-3" controlId="formGridAddres">
+              <Form.Label>Gender</Form.Label>
 
-        <Form.Group as={Col} controlId="formGridState">
-          <Form.Label>State</Form.Label>
-          <Form.Select defaultValue="Choose...">
-            <option>Choose...</option>
-            <option>...</option>
-          </Form.Select>
-        </Form.Group>
+              <Form.Select aria-label="Default select example">
+                <option>Select Gender</option>
+                <option value="1">Male</option>
+                <option value="2">Female</option>
+                <option value="3">Other</option>
+              </Form.Select>
+            </Form.Group>
+            <Form.Group
+              className="mb-3  mx-3 my-3"
+              id="formGridCheckbox"
+            ></Form.Group>
+            <Form.Group className="mb-3  mx-3 my-3" id="formGridCheckbox">
+              <Form.Label>Upload Image</Form.Label>
+              <Form.Control type="file" size="sm" />
+            </Form.Group>
 
-        <Form.Group as={Col} controlId="formGridZip">
-          <Form.Label>Zip</Form.Label>
-          <Form.Control />
-        </Form.Group>
-      </Row>
-
-      <Form.Group className="mb-3  mx-3 my-3" id="formGridCheckbox">
-        <Form.Check type="checkbox" label="Check me out" />
-      </Form.Group>
-
-      <Button variant="primary" type="submit">
-        Submit
-      </Button>
-    </Form>
+            <Button
+              onClick={onSubmit}
+              className={`w-25 ${styles.bt}`}
+              variant="dark"
+            >
+              Submit
+            </Button>
+            <Button className={`  bg-light  ${styles.btt} `}>
+              <Link to="/user" className="variant=" outline-dark size="sm">
+                Cancel
+              </Link>
+            </Button>
+          </Form>
+        </div>
+      </div>
+      </div>
     </>
-
   );
 }
 

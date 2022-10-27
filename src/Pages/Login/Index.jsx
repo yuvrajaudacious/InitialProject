@@ -72,7 +72,7 @@ const Login = () => {
                                   <Field
                                     type="email"
                                     className="form-control"
-                                    placeholder="enter email"
+                                    placeholder="Enter email"
                                     name="email"
                                     className={`mt-2 form-control
 						${touched.email && errors.email ? "is-invalid" : ""}`}
@@ -90,7 +90,7 @@ const Login = () => {
                                   <Field
                                     type="password"
                                     className="form-control"
-                                    placeholder="enter password"
+                                    placeholder="Enter password"
                                     name="password"
                                     className={`mt-2 form-control
 						${touched.password && errors.password ? "is-invalid" : ""}`}

@@ -1,22 +1,13 @@
-import React from 'react'
-import Header from '../../Component/Header/Header';
-import User from '../../Component/User/User';
-// import Navbar from '../../Component/Navbar/Index'
+import Headers from "../../Component/Home.jsx/Headers";
+import Silider from "../../Component/Home.jsx/Silider";
 
-import {userdata} from "../../Dummy";
-const Dashboard = () => {
-  console.log(userdata)
+function Dashboad() {
   return (
-    <div>
-     
-   <Header/>
-    <User/>
-
-  
-
- 
-    </div>
-  )
+    <>
+    <Headers/>
+    <Silider/>
+    </>
+  );
 }
 
-export default Dashboard
+export default Dashboad;

@@ -1,206 +1,204 @@
-import React from "react";
-import { Formik, Form, Field, ErrorMessage } from "formik";
-import * as Yup from "yup";
-import { Link } from "react-router-dom";
+import React, { useState } from "react";
 import styles from "./sign.module.css";
-// const baseURL = "http://localhost:8000/api/v1/signUp";
-import {
-  MDBBtn,
-  MDBContainer,
-  MDBCard,
-  MDBCardBody,
-  MDBInput,
-  MDBCheckbox,
-} from "mdb-react-ui-kit";
-const LoginSchema = Yup.object().shape({
-  Name: Yup.string()
-  .min(2, "Too Short!")
-  .max(50, "Too Long!")
-  .required("Name is required"),
- Number: Yup.string()
-    .required("Phone number is required")
-    .matches(
-/^([0]{1}|\+?[234]{3})([7-9]{1})([0|1]{1})([\d]{1})([\d]{7})$/g,
-      "Invalid phone number"
-    ),
-    Address: Yup.string()
-    .min(10, "Too Short!")
-    .max(100, "Too Long!")
-    .required("Address is required"),
+import * as Yup from "yup";
 
+const userLogin = Yup.object({
+  name: Yup.string()
+  .required("Name is Required"),
+  number: Yup.number()
+  .required('A phone number is required'),
   email: Yup.string()
-    .email("Invalid email address format")
-    .required("Email is required"),
-
-  password: Yup.string()
-    .min(6, "Password must be 6 characters at minimum")
-    .required("Password is required"),
+  .email("")
+  .required("Email is required"),
+  password: Yup.string().required("Password is Required"),
+  address: Yup.string().required("Address is Required"),
+  gender: Yup.string().required("gender is Required"),
 });
-function App() {
+
+const Signup = () => {
+  const [userRegistration, setUserRegistration] = useState({
+    name: "",
+    number: "",
+    email: "",
+    password: "",
+    address: "",
+    gender: "",
+  });
+  const [currentErrors, setCurrentErrors] = useState({
+    name: "",
+    number: "",
+    email: "",
+    password: "",
+    address: "",
+    gender: "",
+  });
+  const [data, setData] = useState({
+    name: "",
+    number: "",
+    email: "",
+    password: "",
+    address: "",
+    gender: "",
+  });
+
+  const runValidations = () => {
+    userLogin
+      .validate(userRegistration, { abortEarly: false })
+      .then((responseData) => {
+        console.log("no validation errors");
+        console.log(responseData);
+        setCurrentErrors({
+        name: "",
+        number: "",
+        email: "",
+        password: "",
+        address: "",
+        gender: "",
+      });
+      })
+      .catch((currentErrors) => {
+        console.log(currentErrors);
+        console.log(currentErrors.name, "hgjhh "); // ValidationError
+        console.log(currentErrors.errors, "errrrrorrrrr");
+        setCurrentErrors({
+          name: currentErrors.errors[0],
+          number:currentErrors.errors[1],
+          email: currentErrors.errors[2],
+          password:currentErrors.errors[3],
+          address:currentErrors.errors[4],
+          gender:currentErrors.errors[5],
+
+
+        });
+      
+      });
+  };
+ console.log(
+  currentErrors
+ );
+  const changeValue = (field, val) => {
+    const newData = { ...data };
+    newData[field] = val;
+    setData(newData);
+  };
+
+  const handleInput = (e) => {
+    const name = e.target.name;
+    const value = e.target.value;
+
+    setUserRegistration({ ...userRegistration, [name]: value });
+  };
+  const handleSubmit = (event) => {
+    event.preventDefault();
+    console.log(userRegistration);
+  };
   return (
-    <div className={`${styles.bg}`}>
-      <MDBContainer
-        fluid
-        className="d-flex align-items-center justify-content-center bg-image"
-      >
-        <div className="mask gradient-custom-3"></div>
-        <MDBCard className="m-4 w-100 " style={{ maxWidth: "600px" }}>
-          <MDBCardBody className="">
-            <h4 className={`  card-header ${styles.h}`}>
-              <b>Create an account</b>
-            </h4>
-            <Formik
-              initialValues={{
-                Name: "",
-                Number: "",
-                email: "",
-                password: "",
-                Gender: "",
-                Address: "",
-              }}
-              validationSchema={LoginSchema}
-              onSubmit={(values) => {
-                console.log(values);
-              }}
+    <>
+      <div classname="container">
+        {/* <input type="datetime-local"
+        ></input> */}
+        <div className={`card ${styles.btt} `}>
+          <form
+            classname={` my-3 ${styles.h}`}
+            onSubmit={handleSubmit}
+            initialValue={{ userRegistration }}
+          >
+            <div class="form-row">
+              <div class="form-group col-md-6">
+                <label namefor="inputemail4">Name</label>
+                <input
+                  name="name"
+                  class="form-control"
+                  id="inputnamel4"
+                  placeholder="name"
+                  onChange={handleInput}
+                />
+              </div>
+              <p style={{ color: "red" }}>{currentErrors.name}</p>
+
+              <div class="form-group col-md-6">
+                <label for="inputemail4">Number</label>
+                <input
+                  name="number"
+                  class="form-control"
+                  id="inputnumber4"
+                  placeholder="number"
+                  onChange={handleInput}
+                />
+              <p style={{ color: "red" }}>{currentErrors.number}</p>
+              </div>
+
+
+              <div class="form-group col-md-6">
+                <label for="inputemail4">Email</label>
+                <input
+                  name="email"
+                  class="form-control"
+                  id="inputemail4"
+                  placeholder="email"
+                />
+               <p style={{ color: "red" }}>{currentErrors.email}</p>
+
+              </div>
+              
+              
+              
+              <div class="form-group col-md-6">
+                <label for="inputpassword4">Password</label>
+                <input
+                  name="password"
+                  class="form-control"
+                  id="inputpassword4"
+                  placeholder="password"
+                  onChange={(e) => changeValue("password", e.target.value)}
+                />
+                 <p style={{ color: "red" }}>{currentErrors.password}</p>
+              </div>
+            </div>
+            <div class="form-group">
+              <label for="inputaddress">Address</label>
+              <input
+                name="address"
+                class="form-control"
+                id="inputaddress"
+                placeholder="1234 Main St"
+                onChange={handleInput}
+              />
+                 <p style={{ color: "red" }}>{currentErrors.address}</p>
+            </div>
+
+            <div class="form-row">
+              <div class="form-group col-md-4">
+                <label for="inputState">Gender</label>
+                <select
+                  name="gender"
+                  id="inputState"
+                  class="form-control"
+                  onChange={handleInput}
+                >
+                  <option selected>Choose</option>
+                  <option>Male</option>
+                  <option>Female</option>
+                  <option>other</option>
+                </select>
+                <p style={{ color: "red" }}>{currentErrors.gender}</p>
+
+              </div>
+            </div>
+            <button
+              onClick={runValidations}
+              type="button"
+              class="btn btn-primary"
             >
-              {({ touched, errors, isSubmitting, values }) =>
-                !isSubmitting ? (
-                  <Form className="">
-                    <div className="d-flex flex-row align-items-center ">
-                      {/* <i className=""></i> */}
-                      <div className="row">
-                        <div className=" flex-fill  ">
-                          <label>
-                            {" "}
-                            <b>Name</b>
-                          </label>
-
-                          <input
-                        type="Name"
-                        className="form-control"
-                        placeholder=" Name"
-                        name="Name"
-                        className={`mt-2 form-control
-${touched.Name && errors.Name ? "is-invalid" : ""}`}
-                      />
-                      <ErrorMessage
-                        component="div"
-                        name="Name"
-                        className="invalid-feedback"
-                      />
-                        </div>
-                      </div>
-                      <div className="mx-4 my-2">
-                        <label>
-                          <b>Contact Number</b>{" "}
-                        </label>
-                        <Field
-                          type="Number"
-                          className="form-control"
-                          placeholder="Contact Number"
-                          name="number"
-                          className={`mt-2 form-control
-${touched.Number && errors.Number ? "is-invalid" : ""}`}
-/>
-<ErrorMessage
-                        component="div"
-                        name="Number"
-                        className="invalid-feedback"
-                      />
-                        
-                      </div>
-                    </div>
-                    <div className=" my-2">
-                      <label>
-                        <b>Email</b>{" "}
-                      </label>
-                      <Field
-                        type="email"
-                        className="form-control"
-                        placeholder=" Email"
-                        name="email"
-                        className={`mt-2 form-control
-${touched.email && errors.email ? "is-invalid" : ""}`}
-                      />
-                      <ErrorMessage
-                        component="div"
-                        name="email"
-                        className="invalid-feedback"
-                      />
-                    </div>
-                    <div className=" my-2">
-                      <label>
-                        <b>Password</b>
-                      </label>
-                      <Field
-                        type="password"
-                        className="form-control"
-                        placeholder=" Password"
-                        name="password"
-                        className={`mt-2 form-control
-${touched.password && errors.password ? "is-invalid" : ""}`}
-                      />
-                      <ErrorMessage
-                        component="div"
-                        name="password"
-                        className="invalid-feedback"
-                      />
-                    </div>
-                    <div className=" my-2">
-                      <label>
-                        <b>Address</b>{" "}
-                      </label>
-                      <input
-                        type="TEXT"
-                        className="form-control"
-                        placeholder=" Address"
-                        name="Address"
-                        className={`mt-2 form-control
-${touched.email && errors.email ? "is-invalid" : ""}`}
-                      />
-                      <ErrorMessage
-                        component="div"
-                        name="Address"
-                        className="invalid-feedback"
-                      />
-                    </div>
-                    <div className="mb-3  my-2">
-                      <label>
-                        <b>Gender</b>{" "}
-                      </label>
-
-                      <select
-                        className="form-select"
-                        aria-label="Default select example"
-                        className={`mt-2 form-control
-${touched.email && errors.email ? "is-invalid" : ""}`}
-                      >
-                        <option selected> Select Gender</option>
-                        <option value="1">Male</option>
-                        <option value="2">female</option>
-                        <option value="3">other</option>
-                      </select>
-                    </div>
-
-                    <div className={`${styles.btt}`}>
-                      <button type="btn" to="/" className="btn btn-dark">
-                        Sign Up
-                      </button>
-                    </div>
-                    <p className="forgot-password text-right my-3">
-                      Already registered <Link to="/">Login in?</Link>
-                    </p>
-                  </Form>
-                ) : (
-                  <div></div>
-                )
-              }
-            </Formik>
-          </MDBCardBody>
-        </MDBCard>
-      </MDBContainer>
-    </div>
+              Submit
+            </button>
+           
+          </form>
+        </div>
+      </div>
+      <button className="scrollToTop" aria-label="Scroll back to top"></button>
+    </>
   );
-}
+};
 
-export default App;
+export default Signup;

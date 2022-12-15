@@ -1,72 +1,35 @@
-import React, { useState } from "react";
-import styles from "./sign.module.css";
+import React from "react";
+import { Formik, Form, Field } from "formik";
 import * as Yup from "yup";
+import { Link } from "react-router-dom";
+import styles from "./sign.module.css";
 
-const userLogin = Yup.object({
-  name: Yup.string().required("Name is Required"),
-  number: Yup.string().required("A phone number is required"),
-  email: Yup.string().required("Email is required"),
-  password: Yup.string().required("Password is Required"),
-  address: Yup.string().required("Address is Required"),
-  gender: Yup.string().required("gender is Required"),
+const SignupSchema = Yup.object().shape({
+  name: Yup.string()
+    .min(2, "Too Short!")
+    .max(50, "Too Long!")
+    .required("Name is required"),
+  phoneNumber: Yup.string()
+    .required("Phone number is required")
+    .min(10, "Phone numberis too short - should be 10 chars minimum"),
+
+  email: Yup.string().email("Invalid email").required(" Email is Required"),
+  password: Yup.string()
+    .required("Password is required")
+    .min(6, "Password is too short - should be 6 chars minimum"),
+  address: Yup.string()
+    .min(2, "Too Short!")
+    .max(100, "Too Long!")
+    .required("Address is required"),
+  gender: Yup.string().required("shssjhda"),
 });
 
-const Signup = () => {
-  const [userRegistration, setUserRegistration] = useState({
-    name: "",
-    number: "",
-    email: "",
-    password: "",
-    address: "",
-    gender: "",
-  });
-  const [currentErrors, setCurrentErrors] = useState({});
-  const [data, setData] = useState({});
-
-  const runValidations = () => {
-    userLogin
-      .validate(userRegistration, { abortEarly: false })
-      .then((responseData) => {
-        console.log("no validation errors");
-        console.log(responseData);
-        setCurrentErrors({});
-      })
-      .catch((currentErrors) => {
-        console.log(currentErrors);
-        console.log(currentErrors.name, "hgjhh "); // ValidationError
-        console.log(currentErrors.errors, "errrrrorrrrr");
-        setCurrentErrors({
-          name: currentErrors.errors[0],
-          number: currentErrors.errors[1],
-          email: currentErrors.errors[2],
-          password: currentErrors.errors[3],
-          address: currentErrors.errors[4],
-          gender: currentErrors.errors[5],
-        });
-      });
-  };
-  console.log(currentErrors);
-  const changeValue = (field, val) => {
-    const newData = { ...data };
-    newData[field] = val;
-    setData(newData);
-  };
-
-  const handleInput = (e) => {
-    const name = e.target.name;
-    const value = e.target.value;
-
-    setUserRegistration({ ...userRegistration, [name]: value });
-  };
-  const handleSubmit = (event) => {
-    event.preventDefault();
-    console.log(userRegistration);
-  };
+const Index = () => {
   return (
-    <>
-      <section class="card">
-        <div class="container ">
-          <div class="row d-flex justify-content-center align-items-center ">
+    <div className={`vh-190 ${styles.bg}`}>
+      <section class="vh-190">
+        <div class="container h-100">
+          <div class="row d-flex justify-content-center align-items-center h-100">
             <div class="col-lg-12 col-xl-11">
               <div class="card text-black">
                 <div class="card-body p-md-5">
@@ -75,140 +38,168 @@ const Signup = () => {
                       <p class="text-center h1 fw-bold mb-5 mx-1 mx-md-4 mt-4">
                         Sign up
                       </p>
-
-                      <form
-                        class="mx-1 mx-md-4"
-                        onSubmit={handleSubmit}
-                        initialValue={{ userRegistration }}
+                      <Formik
+                        initialValues={{
+                          name: "",
+                          phoneNumber: "",
+                          email: "",
+                          password: "",
+                          address: "",
+                          gender: "",
+                        }}
+                        validationSchema={SignupSchema}
+                        onSubmit={(values) => {
+                          console.log(values);
+                        }}
                       >
-                        <div class="d-flex flex-row align-items-center mb-4">
-                          <i class="fas fa-user fa-lg me-3 fa-fw"></i>
-                          <div class="form-outline flex-fill mb-0">
-                            <label namefor="inputemail4">Name</label>
-                            <input
-                              name="name"
-                              class="form-control"
-                              id="inputnamel4"
-                              placeholder="name"
-                              onChange={handleInput}
-                            />
-                            <p style={{ color: "red" }}>{currentErrors.name}</p>{" "}
-                          </div>
-                        </div>
+                        {({ errors, touched }) => (
+                          <Form class="mx-1 mx-md-4">
+                            <div class="d-flex flex-row align-items-center mb-4">
+                              <div class="form-outline flex-fill mb-0">
+                                <label class="form-label">Name</label>
+                                <Field class="form-control" name="name" />
+                                {errors.name && touched.name ? (
+                                  <div style={{ color: "red" }}>
+                                    {errors.name}
+                                  </div>
+                                ) : null}
+                              </div>
+                            </div>
 
-                        <div class="d-flex flex-row align-items-center mb-4">
-                          <i class="fas fa-envelope fa-lg me-3 fa-fw"></i>
-                          <div class="form-outline flex-fill mb-0">
-                            <label for="inputemail4">Number</label>
-                            <input
-                              name="number"
-                              class="form-control"
-                              id="inputnumber4"
-                              placeholder="number"
-                              onChange={handleInput}
-                            />
-                            <p style={{ color: "red" }}>
-                              {currentErrors.number}
-                            </p>
-                          </div>
-                        </div>
+                            <div class="d-flex flex-row align-items-center mb-4">
+                              <div class="form-outline flex-fill mb-0">
+                                <label class="form-label">Phone Number</label>
+                                <Field
+                                  class="form-control"
+                                  name="phoneNumber"
+                                  type="phoneNumber"
+                                />
+                                {errors.phoneNumber && touched.phoneNumber ? (
+                                  <div style={{ color: "red" }}>
+                                    {errors.phoneNumber}
+                                  </div>
+                                ) : null}
+                              </div>
+                            </div>
 
-                        <div class="d-flex flex-row align-items-center mb-4">
-                          <i class="fas fa-lock fa-lg me-3 fa-fw"></i>
-                          <div class="form-outline flex-fill mb-0">
-                            <label for="inputemail4">Email</label>
-                            <input
-                              name="email"
-                              class="form-control"
-                              id="inputemail4"
-                              placeholder="email"
-                            />
-                            <p style={{ color: "red" }}>
-                              {currentErrors.email}
-                            </p>
-                          </div>
-                        </div>
+                            <div class="d-flex flex-row align-items-center mb-4">
+                              <div class="form-outline flex-fill mb-0">
+                                <label class="form-label">Email</label>
 
-                        <div class="d-flex flex-row align-items-center mb-4">
-                          <i class="fas fa-key fa-lg me-3 fa-fw"></i>
-                          <div class="form-outline flex-fill mb-0">
-                            <label for="inputpassword4">Password</label>
-                            <input
-                              name="password"
-                              class="form-control"
-                              id="inputpassword4"
-                              placeholder="password"
-                              onChange={(e) =>
-                                changeValue("password", e.target.value)
-                              }
-                            />
-                            <p style={{ color: "red" }}>
-                              {currentErrors.password}
-                            </p>
-                          </div>
-                        </div>
-                        <div class="d-flex flex-row align-items-center mb-4">
-                          <i class="fas fa-key fa-lg me-3 fa-fw"></i>
-                          <div class="form-outline flex-fill mb-0">
-                            <label for="inputaddress">Address</label>
-                            <input
-                              name="address"
-                              class="form-control"
-                              id="inputaddress"
-                              placeholder="1234 Main St"
-                              onChange={handleInput}
-                            />
-                            <p style={{ color: "red" }}>
-                              {currentErrors.address}
-                            </p>
-                          </div>
-                        </div>
-                        <div class="d-flex flex-row align-items-center mb-4">
-                          <i class="fas fa-key fa-lg me-3 fa-fw"></i>
-                          <div class="form-outline flex-fill mb-0">
-                            <label for="inputState">Gender</label>
-                            <select
-                              name="gender"
-                              id="inputState"
-                              class="form-control"
-                              onChange={handleInput}
-                            >
-                              <option selected>Choose</option>
-                              <option>Male</option>
-                              <option>Female</option>
-                              <option>other</option>
-                            </select>
-                            <p style={{ color: "red" }}>
-                              {currentErrors.gender}
-                            </p>
-                          </div>
-                        </div>
+                                <Field
+                                  class="form-control"
+                                  name="email"
+                                  type="email"
+                                />
+                                {errors.email && touched.email ? (
+                                  <div style={{ color: "red" }}>
+                                    {errors.email}
+                                  </div>
+                                ) : null}
+                              </div>
+                            </div>
 
-                        <div class="form-check d-flex justify-content-center mb-5">
-                          <input
-                            class="form-check-input me-2"
-                            type="checkbox"
-                            value=""
-                            id="form2Example3c"
-                          />
-                          <label class="form-check-label" for="form2Example3">
-                            I agree all statements in{" "}
-                            <a href="#!">Terms of service</a>
-                          </label>
-                        </div>
+                            <div class="d-flex flex-row align-items-center mb-4">
+                              <div class="form-outline flex-fill mb-0">
+                                <label class="form-label">Password</label>
+                                <Field
+                                  class="form-control"
+                                  type="password"
+                                  name="password"
+                                />
+                                {errors.password && touched.password ? (
+                                  <div style={{ color: "red" }}>
+                                    {errors.password}
+                                  </div>
+                                ) : null}
+                              </div>
+                            </div>
+                            <div class="d-flex flex-row align-items-center mb-4">
+                              <div class="form-outline flex-fill mb-0">
+                                <label class="form-label">Address</label>
+                                <Field
+                                  class="form-control"
+                                  type="address"
+                                  name="address"
+                                />
+                                {errors.address && touched.address ? (
+                                  <div style={{ color: "red" }}>
+                                    {errors.address}
+                                  </div>
+                                ) : null}
+                              </div>
+                            </div>
+                            <div class="d-flex flex-row align-items-center mb-4">
+                              <div class="form-outline flex-fill mb-0">
+                                <div class="d-md-flex justify-content-start align-items-center mb-4 py-2">
+                                  <label class="mb-0 me-4">Gender: </label>
 
-                        <div class="d-flex justify-content-center mx-4 mb-3 mb-lg-4">
-                          <button
-                            onClick={runValidations}
-                            type="button"
-                            class="btn btn-primary"
-                          >
-                            Submit
-                          </button>
-                        </div>
-                      </form>
+                                  <div class="form-check form-check-inline mb-0 me-4">
+                                    <input
+                                      class="form-check-input"
+                                      type="radio"
+                                      name="inlineRadioOptions"
+                                      id="femaleGender"
+                                      value="option1"
+                                    />
+                                    <label
+                                      class="form-check-label"
+                                      for="femaleGender"
+                                    >
+                                      Female
+                                    </label>
+                                  </div>
+
+                                  <div class="form-check form-check-inline mb-0 me-4">
+                                    <input
+                                      class="form-check-input"
+                                      type="radio"
+                                      name="inlineRadioOptions"
+                                      id="maleGender"
+                                      value="option2"
+                                    />
+                                    <label
+                                      class="form-check-label"
+                                      for="maleGender"
+                                    >
+                                      Male
+                                    </label>
+                                  </div>
+
+                                  <div class="form-check form-check-inline mb-0">
+                                    <input
+                                      class="form-check-input"
+                                      type="radio"
+                                      name="inlineRadioOptions"
+                                      id="otherGender"
+                                      value="option3"
+                                    />
+                                    <label
+                                      class="form-check-label"
+                                      for="otherGender"
+                                    >
+                                      Other
+                                    </label>
+                                  </div>
+                                </div>
+                              </div>
+                            </div>
+
+                            <div class="d-flex  mx-  ">
+                              <button
+                                type="submit"
+                                className={`btn btn-dark btn-lg btn-block ${styles.btt}`}
+                              >
+                                Sign in
+                              </button>
+                            </div>
+                            <Link className=" mx-1 text-info" to="/">
+                              <b>Already Login </b>
+                            </Link>
+                          </Form>
+                        )}
+                      </Formik>
                     </div>
-
                     <div class="col-md-10 col-lg-6 col-xl-7 d-flex align-items-center order-1 order-lg-2">
                       <img
                         src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-registration/draw1.webp"
@@ -223,8 +214,8 @@ const Signup = () => {
           </div>
         </div>
       </section>
-    </>
+    </div>
   );
 };
 
-export default Signup;
+export default Index;

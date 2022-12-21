@@ -1,6 +1,7 @@
 .btt{
     margin-left: -1px;
    width:205px ;   
+   margin-top: -20px;
    
 }
 .h{
@@ -11,4 +12,13 @@
     background-image: url("https://wallpaperaccess.com/full/4893706.jpg ");
 
     height: ;
+}
+.al{
+    margin-right: 349px;
+    max-width: 50px;
+    margin-top: 70px;
+
+
+}
+.b{
 }
